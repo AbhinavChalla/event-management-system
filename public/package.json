@@ -1,0 +1,17 @@
+{
+  "name": "college-event-platform",
+  "version": "1.0.0",
+  "description": "A platform for managing college events.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "node-cron": "^4.2.1",
+    "nodemailer": "^7.0.10",
+    "sqlite3": "^5.1.6"
+  }
+}

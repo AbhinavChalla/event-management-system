@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendee Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="dashboard-header">
+        <h1>Attendee Dashboard</h1>
+        <div class="user-info">
+            Welcome, <span id="username"></span>
+            
+            <a href="/mytickets.html" class="nav-link">My Tickets</a>
+
+            <div class="dark-mode-toggle-dash">
+                <span>Dark Mode</span>
+                <label class="switch">
+                    <input type="checkbox" id="dark-mode-switch">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <button id="logout-btn">Logout</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>Available Events</h2>
+        
+        <div class="filter-container">
+            <label for="status-filter">Filter by Status:</label>
+            <select id="status-filter">
+                <option value="all">All Events</option>
+                <option value="active">Active (Can Book)</option>
+                <option value="inactive">Inactive (Past/Full)</option>
+            </select>
+        </div>
+
+        <div id="event-list" class="event-list">
+        </div>
+    </main>
+    
+    <script src="script.js"></script>
+</body>
+</html>
