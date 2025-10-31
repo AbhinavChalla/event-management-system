@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Tickets</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="dashboard-header">
+        <h1>My Tickets</h1>
+        <div class="user-info">
+            Welcome, <span id="username"></span>
+            <a href="/dashboard.html" class="nav-link">All Events</a>
+            <div class="dark-mode-toggle-dash">
+                <span>Dark Mode</span>
+                <label class="switch">
+                    <input type="checkbox" id="dark-mode-switch">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <button id="logout-btn">Logout</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>Your Acquired Tickets</h2>
+        <p>Show this page at the event. Your Ticket ID is your proof of entry.</p>
+        <div id="ticket-list" class="event-list">
+            </div>
+    </main>
+    
+    <script src="script.js"></script>
+</body>
+</html>

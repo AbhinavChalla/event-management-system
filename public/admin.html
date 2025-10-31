@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="dashboard-header">
+        <h1>Admin Dashboard</h1>
+        <div class="user-info">
+            Welcome, <span id="username"></span>
+            <div class="dark-mode-toggle-dash">
+                <span>Dark Mode</span>
+                <label class="switch">
+                    <input type="checkbox" id="dark-mode-switch">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <button id="logout-btn">Logout</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="admin-actions">
+                <button type="button" id="open-venue-modal-btn" class="btn-primary">
+                    <span class="btn-icon">📍</span> Add Venue
+                </button>
+                <button type="button" id="open-event-modal-btn" class="btn-primary">
+                    <span class="btn-icon">📅</span> Create Event
+                </button>
+            </div>
+
+            <div id="admin-event-list-container">
+                <h2>Your Created Events</h2>
+                <div id="admin-event-list" class="event-list">
+                    </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="venue-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h2>Create New Venue</h2>
+            <form id="create-venue-form">
+                <p class="modal-hint">Create venues before you create events.</p>
+                <div class="form-group">
+                    <label for="venue-name">Venue Name</label>
+                    <input type="text" id="venue-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="venue-location">Venue Location</label>
+                    <input type="text" id="venue-location" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn-save">Create Venue</button>
+                    <button type="button" id="cancel-venue-btn" class="btn-cancel">Cancel</button>
+                </div>
+                <p id="venue-message" class="message"></p>
+            </form>
+        </div>
+    </div>
+
+
+<div id="event-modal" class="modal-overlay hidden">
+    <div class="modal-content">
+        <h2>Create New Event</h2>
+        <form id="create-event-form">
+            <div class="validation-info">
+                <h4>⚠️ Event Requirements:</h4>
+                <ul>
+                    <li>✓ Start time must be in the future</li>
+                    <li>✓ Event must be at least 15 minutes long</li>
+                    <li>✓ Event cannot exceed 8 hours</li>
+                    <li>✓ 1-hour buffer required between events at same venue</li>
+                </ul>
+            </div>
+            
+            <div class="form-group">
+                <label for="event-title">Event Title</label>
+                <input type="text" id="event-title" required>
+            </div>
+            <div class="form-group">
+                <label for="event-date">Start Date & Time</label>
+                <input type="datetime-local" id="event-date" required>
+                <small class="form-hint">Must be in the future</small>
+            </div>
+            <div class="form-group">
+                <label for="event-end-time">End Date & Time</label>
+                <input type="datetime-local" id="event-end-time" required>
+                <small class="form-hint">Min: 15 min after start | Max: 8 hours after start</small>
+            </div>
+            <div class="form-group">
+                <label for="event-venue">Venue</label>
+                <select id="event-venue" required>
+                    <option value="">-- Select a Venue --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="event-capacity">Capacity (Total Seats)</label>
+                <input type="number" id="event-capacity" min="1" required>
+            </div>
+            <div class="form-group">
+                <label for="event-price">Price (0 for free)</label>
+                <input type="number" id="event-price" min="0" step="0.01" value="0" required>
+            </div>
+            
+            <div class="modal-actions">
+                <button type="submit" class="btn-save">Create Event</button>
+                <button type="button" id="cancel-event-btn" class="btn-cancel">Cancel</button>
+            </div>
+            <p id="event-message" class="message"></p>
+        </form>
+    </div>
+</div>
+
+
+<div id="edit-event-modal" class="modal-overlay hidden">
+    <div class="modal-content">
+        <h2>Edit Event</h2>
+        <form id="edit-event-form">
+            <input type="hidden" id="edit-event-id">
+            
+            <div class="validation-info">
+                <h4>⚠️ Event Requirements:</h4>
+                <ul>
+                    <li>✓ Start time must be in the future</li>
+                    <li>✓ Event must be at least 15 minutes long</li>
+                    <li>✓ Event cannot exceed 8 hours</li>
+                    <li>✓ 2-hour buffer required between events at same venue</li>
+                </ul>
+            </div>
+            
+            <div class="form-group">
+                <label for="edit-event-title">Event Title</label>
+                <input type="text" id="edit-event-title" required>
+            </div>
+            <div class="form-group">
+                <label for="edit-event-date">Start Date & Time</label>
+                <input type="datetime-local" id="edit-event-date" required>
+                <small class="form-hint">Must be in the future</small>
+            </div>
+            <div class="form-group">
+                <label for="edit-event-end-time">End Date & Time</label>
+                <input type="datetime-local" id="edit-event-end-time" required>
+                <small class="form-hint">Min: 15 min after start | Max: 8 hours after start</small>
+            </div>
+            <div class="form-group">
+                <label for="edit-event-venue">Venue</label>
+                <select id="edit-event-venue" required>
+                    <option value="">-- Select a Venue --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="edit-event-capacity">Capacity (Total Seats)</label>
+                <input type="number" id="edit-event-capacity" min="1" required>
+            </div>
+            <div class="form-group">
+                <label for="edit-event-price">Price</label>
+                <input type="number" id="edit-event-price" min="0" step="0.01" required>
+            </div>
+            
+            <div class="modal-actions">
+                <button type="submit" class="btn-save">Save Changes</button>
+                <button type="button" id="cancel-edit-btn" class="btn-cancel">Cancel</button>
+            </div>
+            <p id="edit-event-message" class="message"></p>
+        </form>
+    </div>
+</div>
+    
+<div id="report-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            
+            <div id="report-content"> 
+                <h2 id="report-title">Event Report</h2>
+                <div id="report-body">
+                    <p>Loading report data...</p>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" id="print-report-btn" class="btn-save">Print / Save as PDF</button>
+                <button type="button" id="close-report-btn" class="btn-cancel">Close</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
